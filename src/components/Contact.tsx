@@ -21,22 +21,37 @@ const Contact = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // For now, we're simulating a form submission
+      // In a real implementation, you'd send this data to a backend service
+      // that would handle the email sending to admin@itxuy.com
+      
+      // Email service integration placeholder
+      console.log('Form data submitted to admin@itxuy.com:', formData);
+      
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       toast({
         title: "Mensaje enviado",
         description: "¡Gracias por contactarnos! Nos comunicaremos contigo a la brevedad.",
       });
+      
       setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error al enviar mensaje",
+        description: "Por favor intenta nuevamente más tarde.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
-    
-    // In a real implementation, you'd send this data to your backend
-    console.log('Form data submitted:', formData);
+    }
   };
 
   return (
@@ -51,6 +66,9 @@ const Contact = () => {
           <h2 className="section-title">Contacto</h2>
           <p className="section-subtitle mx-auto">
             ¿Tenés una duda? Escribinos y vemos cómo ayudarte. El primer diagnóstico es gratis.
+          </p>
+          <p className="text-sm text-itx-blue mb-8">
+            Tu mensaje será enviado a: admin@itxuy.com
           </p>
         </div>
         

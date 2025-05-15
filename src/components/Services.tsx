@@ -1,4 +1,3 @@
-
 import { useIntersectionObserver } from '@/lib/animations';
 import { Network, Headphones, Shield, Lock, Camera } from 'lucide-react';
 
@@ -69,7 +68,7 @@ const Services = () => {
   ];
 
   return (
-    <section id="servicios" className="section-padding bg-itx-lightest">
+    <section id="servicios" className="section-padding">
       <div 
         className="container mx-auto"
         ref={ref as React.RefObject<HTMLDivElement>}

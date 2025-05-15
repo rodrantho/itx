@@ -1,4 +1,3 @@
-
 import { useIntersectionObserver } from '@/lib/animations';
 import { Clock, LayoutPanelLeft, CalendarClock } from 'lucide-react';
 
@@ -56,7 +55,7 @@ const Plans = () => {
   ];
 
   return (
-    <section id="planes" className="section-padding bg-itx-lightest">
+    <section id="planes" className="section-padding">
       <div className="container mx-auto">
         <div 
           className="text-center mb-12"

@@ -15,9 +15,11 @@ const About = () => {
   const { ref: ref2, isVisible: isVisible2 } = useIntersectionObserver({ threshold: 0.2 });
   
   const certifications = [
-    "MikroTik MTCNA",
-    "AWS Cloud Practitioner",
-    "UniFi Full Stack"
+    "MikroTik",
+    "AWS",
+    "Ubiquiti",
+    "PaperCut",
+    "Google"
   ];
 
   return (
@@ -48,7 +50,7 @@ const About = () => {
                 Nos enfocamos en atención directa, sin burocracia. Sabemos que tu tiempo vale y que necesitás soluciones, no problemas.
               </p>
               <div className="mb-6 p-4 bg-gradient-to-br from-blue-900/20 to-blue-800/20 backdrop-blur-sm rounded-xl border border-blue-500/20">
-                <p className="font-medium text-white mb-3">Contamos con certificaciones como:</p>
+                <p className="font-medium text-white mb-3">Trabajamos con las mejores tecnologías:</p>
                 <div className="flex flex-wrap">
                   {certifications.map((cert, index) => (
                     <CertificationBadge key={index} name={cert} />

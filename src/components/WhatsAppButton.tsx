@@ -19,8 +19,8 @@ const WhatsAppButton = () => {
   }, []);
 
   const handleClick = () => {
-    // Replace with your actual WhatsApp number
-    const whatsappNumber = '+598xxxxxxxx';
+    // Updated WhatsApp number
+    const whatsappNumber = '+59897207084';
     const message = 'Hola ITX, me interesa conocer más sobre sus servicios.';
     
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');

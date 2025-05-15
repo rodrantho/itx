@@ -1,6 +1,6 @@
 
 import { useIntersectionObserver } from '@/lib/animations';
-import { Clock, LayoutPlaneLine, CalendarClock } from 'lucide-react';
+import { Clock, LayoutPanelLeft, CalendarClock } from 'lucide-react';
 
 const PlanCard = ({
   icon: Icon,
@@ -44,7 +44,7 @@ const Plans = () => {
       description: "Ideal para tareas puntuales que requieren atención inmediata y específica."
     },
     {
-      icon: LayoutPlaneLine,
+      icon: LayoutPanelLeft,
       title: "Por proyecto",
       description: "Implementaciones, migraciones e instalaciones con alcance y precio definidos."
     },

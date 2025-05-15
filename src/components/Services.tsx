@@ -1,6 +1,6 @@
 
 import { useIntersectionObserver } from '@/lib/animations';
-import { Network, Headphones, Shield, Lock, Google, Camera } from 'lucide-react';
+import { Network, Headphones, Shield, Lock, Camera } from 'lucide-react';
 
 const ServiceCard = ({ 
   icon: Icon, 
@@ -57,7 +57,7 @@ const Services = () => {
       description: "Accedé a tu red desde cualquier lugar de forma segura."
     },
     {
-      icon: Google,
+      icon: Network,
       title: "Google Workspace y Microsoft 365",
       description: "Alta, configuración y administración de cuentas y dominios."
     },

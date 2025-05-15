@@ -1,7 +1,7 @@
 
 import { Button } from '@/components/ui/button';
 import { useIntersectionObserver } from '@/lib/animations';
-import { Network, Circuit, Zap } from 'lucide-react';
+import { Network, CircuitBoard, Zap } from 'lucide-react';
 
 const Hero = () => {
   const { ref, isVisible } = useIntersectionObserver();
@@ -26,7 +26,7 @@ const Hero = () => {
       >
         <div className="flex justify-center mb-8 animate-bounce-subtle">
           <div className="bg-gradient-to-br from-blue-600/20 to-blue-800/20 p-5 rounded-full border border-blue-500/30 shadow-lg shadow-blue-500/20">
-            <Circuit size={50} className="text-itx-blue" />
+            <CircuitBoard size={50} className="text-itx-blue" />
           </div>
         </div>
         

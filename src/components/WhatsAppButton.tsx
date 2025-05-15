@@ -29,7 +29,7 @@ const WhatsAppButton = () => {
   return (
     <button
       onClick={handleClick}
-      className={`fixed bottom-5 right-5 bg-[#25D366] text-white rounded-full p-3 shadow-lg z-50 transition-all duration-300 ${
+      className={`fixed bottom-5 right-5 bg-gradient-to-r from-[#25D366] to-[#1EA756] text-white rounded-full p-4 shadow-lg shadow-green-900/30 z-50 transition-all duration-300 border border-green-500/50 ${
         isVisible 
           ? 'opacity-100 translate-y-0 hover:scale-110' 
           : 'opacity-0 translate-y-10'

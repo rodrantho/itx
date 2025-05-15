@@ -1,5 +1,6 @@
+
 import { useIntersectionObserver } from '@/lib/animations';
-import { Network, Headphones, Shield, Lock, Camera } from 'lucide-react';
+import { Network, Headphones, Shield, Lock, Camera, Server } from 'lucide-react';
 
 const ServiceCard = ({ 
   icon: Icon, 
@@ -17,16 +18,22 @@ const ServiceCard = ({
   return (
     <div 
       ref={ref as React.RefObject<HTMLDivElement>}
-      className={`bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 ${
+      className={`tech-card glow-effect backdrop-blur-sm transition-all duration-500 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
       style={{ transitionDelay: `${delay * 100}ms` }}
     >
-      <div className="flex items-center justify-center w-14 h-14 rounded-full bg-blue-50 mb-5">
-        <Icon className="w-6 h-6 text-itx-blue" />
+      <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-700/20 mb-5 border border-blue-500/30 shadow-inner">
+        <Icon className="w-7 h-7 text-itx-blue" />
       </div>
-      <h3 className="text-xl font-semibold mb-3 text-itx-dark">{title}</h3>
-      <p className="text-itx-gray">{description}</p>
+      <h3 className="text-2xl font-semibold mb-3 text-white">{title}</h3>
+      <p className="text-blue-100">{description}</p>
+      
+      <div className="w-full h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent my-4"></div>
+      
+      <div className="flex justify-end">
+        <span className="text-xs uppercase tracking-wider text-blue-400 font-medium">Explorar</span>
+      </div>
     </div>
   );
 };
@@ -38,51 +45,57 @@ const Services = () => {
     {
       icon: Network,
       title: "Redes y conectividad",
-      description: "Instalación, configuración y mantenimiento de redes físicas y WiFi."
+      description: "Instalación, configuración y mantenimiento de redes físicas y WiFi de alto rendimiento para tu empresa."
     },
     {
       icon: Headphones,
       title: "Soporte técnico",
-      description: "Soluciones rápidas para equipos, sistemas y usuarios, de forma remota o presencial."
+      description: "Soluciones rápidas para equipos, sistemas y usuarios, de forma remota o presencial cuando más lo necesites."
     },
     {
       icon: Shield,
       title: "Seguridad informática",
-      description: "Antivirus, firewalls, backups y protección contra accesos no autorizados."
+      description: "Protección avanzada con antivirus, firewalls, backups y sistemas contra accesos no autorizados."
     },
     {
       icon: Lock,
       title: "VPN y accesos seguros",
-      description: "Accedé a tu red desde cualquier lugar de forma segura."
+      description: "Conexiones cifradas para acceder a tu red desde cualquier lugar con máxima seguridad y privacidad."
     },
     {
-      icon: Network,
+      icon: Server,
       title: "Google Workspace y Microsoft 365",
-      description: "Alta, configuración y administración de cuentas y dominios."
+      description: "Configuración profesional y administración eficiente de cuentas corporativas y dominios empresariales."
     },
     {
       icon: Camera,
       title: "Cámaras y control de acceso",
-      description: "Soluciones físicas integradas a la red."
+      description: "Sistemas de vigilancia inteligentes y soluciones de acceso integradas a tu infraestructura de red."
     }
   ];
 
   return (
     <section id="servicios" className="section-padding">
+      {/* Tech background */}
+      <div className="cyber-grid"></div>
+      <div className="absolute top-10 right-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-10 left-10 w-72 h-72 bg-green-500/10 rounded-full blur-3xl"></div>
+      
       <div 
-        className="container mx-auto"
+        className="container mx-auto relative"
         ref={ref as React.RefObject<HTMLDivElement>}
       >
-        <div className={`text-center mb-12 transition-all duration-500 ${
+        <div className={`text-center mb-16 transition-all duration-500 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           <h2 className="section-title">Nuestros Servicios</h2>
+          <div className="neon-line mx-auto mb-6 w-24"></div>
           <p className="section-subtitle mx-auto">
-            Soluciones completas adaptadas a las necesidades de tu negocio.
+            Soluciones tecnológicas de vanguardia adaptadas para potenciar el crecimiento de tu negocio.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {services.map((service, index) => (
             <ServiceCard 
               key={index} 

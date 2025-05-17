@@ -6,8 +6,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Cambiamos la base para que sea relativa en producción
-  base: "./",
+  base: "/",  // 👈 CORRECTO PARA GITHUB PAGES CON DOMINIO PERSONALIZADO
   server: {
     host: "::",
     port: 8080,

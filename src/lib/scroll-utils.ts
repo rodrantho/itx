@@ -7,7 +7,15 @@ export const scrollToSection = (sectionId: string) => {
   setTimeout(() => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Ajustar el scroll para tener en cuenta la altura de la barra de navegación
+      const navbarHeight = 80; // Altura aproximada de la barra de navegación
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     } else {
       console.error(`Elemento con ID "${sectionId}" no encontrado`);
     }

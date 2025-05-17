@@ -2,10 +2,13 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Handle scrolling effect
   useEffect(() => {
@@ -26,12 +29,28 @@ const Navbar = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
+  const handleNavigation = (sectionId: string) => {
+    // Cerrar el menú móvil si está abierto
+    closeMenu();
+    
+    // Si ya estamos en la página principal, solo hacer scroll a la sección
+    if (location.pathname === '/') {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Si estamos en otra página, navegar a la página principal con el hash
+      navigate(`/#${sectionId}`);
+    }
+  };
+
   const navLinks = [
-    { name: 'Servicios', href: '#servicios' },
-    { name: 'Sobre ITX', href: '#sobre-nosotros' },
-    { name: 'Planes', href: '#planes' },
-    { name: 'Contacto', href: '#contacto' },
-    { name: 'FAQ', href: '#faq' },
+    { name: 'Servicios', id: 'servicios' },
+    { name: 'Sobre ITX', id: 'sobre-nosotros' },
+    { name: 'Planes', id: 'planes' },
+    { name: 'Contacto', id: 'contacto' },
+    { name: 'FAQ', id: 'faq' },
   ];
 
   return (
@@ -41,24 +60,31 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <a href="#" className="flex items-center space-x-2">
+        <a 
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate('/');
+          }}
+          className="flex items-center space-x-2"
+        >
           <span className="text-xl font-bold text-itx-blue">ITX</span>
         </a>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
-            <a 
+            <button 
               key={link.name}
-              href={link.href}
+              onClick={() => handleNavigation(link.id)}
               className="text-sm text-itx-dark hover:text-itx-blue transition-colors"
             >
               {link.name}
-            </a>
+            </button>
           ))}
           <Button 
             size="sm"
-            onClick={() => window.location.href = '#contacto'}
+            onClick={() => handleNavigation('contacto')}
             className="bg-itx-blue hover:bg-itx-blue/90"
           >
             Agendá una consulta
@@ -80,21 +106,17 @@ const Navbar = () => {
         <div className="md:hidden bg-white shadow-lg">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-3">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
-                className="text-sm py-2 text-itx-dark hover:text-itx-blue transition-colors"
-                onClick={closeMenu}
+                onClick={() => handleNavigation(link.id)}
+                className="text-sm py-2 text-itx-dark hover:text-itx-blue transition-colors text-left"
               >
                 {link.name}
-              </a>
+              </button>
             ))}
             <Button
               size="sm"
-              onClick={() => {
-                window.location.href = '#contacto';
-                closeMenu();
-              }}
+              onClick={() => handleNavigation('contacto')}
               className="bg-itx-blue hover:bg-itx-blue/90 w-full mt-2"
             >
               Agendá una consulta

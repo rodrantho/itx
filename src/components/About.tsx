@@ -1,6 +1,6 @@
 
 import { useIntersectionObserver } from '@/lib/animations';
-import { Cpu, Zap, Target, Eye } from 'lucide-react';
+import { Cpu, Zap, Target, Eye, Network } from 'lucide-react';
 
 const CertificationBadge = ({ name }: { name: string }) => {
   return (
@@ -142,7 +142,7 @@ const About = () => {
             <MissionVisionCard
               icon={Eye}
               title="Nuestra visión"
-              description="Construir una nueva forma de hacer soporte IT en Uruguay, dejando atrás lo impersonal y burocrático. Queremos que cada pyme, profesional o institución pueda contar con servicios de calidad, sin importar su tamaño. ITX nace con la convicción de que podemos hacer las cosas mejor, más cerca y con sentido."
+              description="Acompañar a personas y empresas brindando soluciones tecnológicas que se adapten a su realidad, con claridad, compromiso y cercanía. Apuntamos a construir relaciones de confianza a largo plazo, donde el soporte técnico no sea solo respuesta, sino una forma de estar presente cuando realmente se necesita."
               delay={1}
             />
           </div>

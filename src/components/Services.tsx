@@ -1,7 +1,7 @@
 
 import { useIntersectionObserver } from '@/lib/animations';
 import { useState } from 'react';
-import { Network, Headphones, Shield, Lock, Camera, Server } from 'lucide-react';
+import { Network, Headphones, Shield, Camera, Server, Bug } from 'lucide-react';
 import { 
   Dialog,
   DialogContent,
@@ -82,9 +82,9 @@ const Services = () => {
     {
       icon: Network,
       title: "Redes y conectividad",
-      description: "Instalación, configuración y mantenimiento de redes físicas y WiFi de alto rendimiento para tu empresa.",
+      description: "Instalación, configuración y mantenimiento de redes físicas, WiFi de alto rendimiento y accesos VPN seguros para tu empresa.",
       details: `
-        <p>Nuestros servicios de redes y conectividad incluyen:</p>
+        <p>Nuestros servicios de redes, conectividad y accesos seguros incluyen:</p>
         <ul class="list-disc pl-5 mt-3 space-y-2">
           <li>Diseño e implementación de redes empresariales de alto rendimiento</li>
           <li>Instalación y configuración de infraestructura WiFi profesional</li>
@@ -92,10 +92,14 @@ const Services = () => {
           <li>Segmentación de redes para mejor seguridad y rendimiento</li>
           <li>Monitoreo proactivo de la salud de la red</li>
           <li>Solución de problemas de conectividad y rendimiento</li>
-          <li>Implementación de redes VPN para acceso remoto seguro</li>
-          <li>Configuración de redes y equipos para redundancia y alta disponibilidad</li>
+          <li>Implementación de VPN site-to-site para conexiones entre oficinas</li>
+          <li>Configuración de VPN de acceso remoto para empleados</li>
+          <li>Soluciones de autenticación multifactor (MFA)</li>
+          <li>Control de acceso basado en roles e identidades</li>
+          <li>Cifrado de tráfico de extremo a extremo</li>
+          <li>Monitoreo de accesos y alertas de seguridad</li>
         </ul>
-        <p class="mt-4">Trabajamos con equipamiento profesional para garantizar conexiones estables y seguras para todos los dispositivos de tu empresa.</p>
+        <p class="mt-4">Trabajamos con equipamiento profesional para garantizar conexiones estables y seguras para todos los dispositivos de tu empresa, sin importar desde dónde accedan tus colaboradores.</p>
       `
     },
     {
@@ -139,22 +143,23 @@ const Services = () => {
       `
     },
     {
-      icon: Lock,
-      title: "VPN y accesos seguros",
-      description: "Conexiones cifradas para acceder a tu red desde cualquier lugar con máxima seguridad y privacidad.",
+      icon: Bug,
+      title: "Testing funcional y validación",
+      description: "Evaluamos plataformas internas, apps o sistemas web para detectar errores, mejorar la experiencia y asegurar su correcto funcionamiento.",
       details: `
-        <p>Nuestras soluciones de VPN y acceso seguro incluyen:</p>
+        <p>Nuestros servicios de testing funcional y validación incluyen:</p>
         <ul class="list-disc pl-5 mt-3 space-y-2">
-          <li>Implementación de VPN site-to-site para conexiones entre oficinas</li>
-          <li>Configuración de VPN de acceso remoto para empleados</li>
-          <li>Soluciones de autenticación multifactor (MFA)</li>
-          <li>Control de acceso basado en roles e identidades</li>
-          <li>Cifrado de tráfico de extremo a extremo</li>
-          <li>Monitoreo de accesos y alertas de seguridad</li>
-          <li>Integración con directorio activo y sistemas de identidad</li>
-          <li>Soluciones Zero Trust para mayor seguridad</li>
+          <li>Pruebas funcionales completas de sistemas</li>
+          <li>Validación de flujos de procesos</li>
+          <li>Pruebas de experiencia de usuario</li>
+          <li>Detección de errores y problemas de rendimiento</li>
+          <li>Reportes claros de incidencias encontradas</li>
+          <li>Recomendaciones para mejoras</li>
+          <li>Pruebas de regresión después de cambios</li>
+          <li>Validación de integración entre sistemas</li>
+          <li>Testing en múltiples dispositivos y navegadores</li>
         </ul>
-        <p class="mt-4">Facilitamos el trabajo remoto seguro mediante conexiones cifradas que protegen la información sensible de tu empresa, sin importar desde dónde accedan tus colaboradores.</p>
+        <p class="mt-4">Ideal para empresas que desarrollan o utilizan sistemas propios y necesitan garantizar que todo funcione correctamente, optimizando la productividad y la satisfacción de los usuarios.</p>
       `
     },
     {

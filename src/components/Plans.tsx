@@ -1,5 +1,6 @@
 
 import { useIntersectionObserver } from '@/lib/animations';
+import { scrollToSection } from '@/lib/scroll-utils';
 import { Clock, LayoutPanelLeft, CalendarClock } from 'lucide-react';
 
 const PlanCard = ({
@@ -14,6 +15,12 @@ const PlanCard = ({
   delay?: number;
 }) => {
   const { ref, isVisible } = useIntersectionObserver();
+
+  const handleMoreInfo = () => {
+    // Navigate to contact section and set the plan information in sessionStorage
+    sessionStorage.setItem('selectedPlan', title);
+    scrollToSection('contacto');
+  };
 
   return (
     <div
@@ -33,9 +40,12 @@ const PlanCard = ({
         
         <div className="mt-4 w-full h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent"></div>
         
-        <div className="mt-4 pb-2">
-          <span className="text-sm uppercase tracking-wider text-blue-400 font-medium">Más Información</span>
-        </div>
+        <button 
+          onClick={handleMoreInfo}
+          className="mt-4 pb-2 hover:text-itx-blue transition-colors cursor-pointer"
+        >
+          <span className="text-sm uppercase tracking-wider text-blue-400 hover:text-itx-blue font-medium">Más Información</span>
+        </button>
       </div>
     </div>
   );

@@ -1,10 +1,15 @@
 
 import { Button } from '@/components/ui/button';
 import { useIntersectionObserver } from '@/lib/animations';
+import { scrollToSection } from '@/lib/scroll-utils';
 import { Network, CircuitBoard, Zap } from 'lucide-react';
 
 const Hero = () => {
   const { ref, isVisible } = useIntersectionObserver();
+  
+  const handleNavigation = (sectionId: string) => {
+    scrollToSection(sectionId);
+  };
   
   return (
     <section 
@@ -45,7 +50,7 @@ const Hero = () => {
           <Button 
             size="lg"
             className="bg-gradient-to-r from-itx-blue to-blue-600 hover:from-itx-blue/90 hover:to-blue-600/90 text-white text-lg py-6 px-8 shadow-lg shadow-blue-900/30 border border-blue-500/30 transition-all duration-300"
-            onClick={() => window.location.href = '#contacto'}
+            onClick={() => handleNavigation('contacto')}
           >
             <Zap size={20} className="mr-2" />
             Agendá una consulta gratis
@@ -54,7 +59,7 @@ const Hero = () => {
             variant="outline"
             size="lg"
             className="border-itx-blue bg-transparent backdrop-blur-sm text-itx-blue hover:bg-blue-500/10 text-lg py-6 px-8 shadow-md transition-all duration-300"
-            onClick={() => window.location.href = '#servicios'}
+            onClick={() => handleNavigation('servicios')}
           >
             <Network size={20} className="mr-2" />
             Conocer servicios

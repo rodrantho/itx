@@ -5,7 +5,10 @@
 export const scrollToSection = (sectionId: string) => {
   // Pequeño retraso para permitir que se complete el cambio de página si es necesario
   setTimeout(() => {
-    const element = document.getElementById(sectionId);
+    // Remover cualquier barra diagonal del principio del ID (en caso de que se pase '/' o '#/')
+    const cleanSectionId = sectionId.replace(/^\/+|^#+\/+/, '');
+    
+    const element = document.getElementById(cleanSectionId);
     if (element) {
       // Ajustar el scroll para tener en cuenta la altura de la barra de navegación
       const navbarHeight = 80; // Altura aproximada de la barra de navegación
@@ -17,7 +20,7 @@ export const scrollToSection = (sectionId: string) => {
         behavior: 'smooth'
       });
     } else {
-      console.error(`Elemento con ID "${sectionId}" no encontrado`);
+      console.error(`Elemento con ID "${cleanSectionId}" no encontrado`);
     }
   }, 100);
 };
@@ -28,8 +31,8 @@ export const scrollToSection = (sectionId: string) => {
 export const handleInitialScroll = () => {
   const hash = window.location.hash;
   if (hash) {
-    // Eliminar el # del inicio
-    const sectionId = hash.substring(1);
+    // Eliminar el # del inicio y cualquier barra diagonal
+    const sectionId = hash.substring(1).replace(/^\/+/, '');
     scrollToSection(sectionId);
   }
 };

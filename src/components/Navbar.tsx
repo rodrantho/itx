@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { scrollToSection } from '@/lib/scroll-utils';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,10 +36,7 @@ const Navbar = () => {
     
     // Si ya estamos en la página principal, solo hacer scroll a la sección
     if (location.pathname === '/') {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+      scrollToSection(sectionId);
     } else {
       // Si estamos en otra página, navegar a la página principal con el hash
       navigate(`/#${sectionId}`);
@@ -61,7 +59,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <a 
-          href="#"
+          href="/"
           onClick={(e) => {
             e.preventDefault();
             navigate('/');

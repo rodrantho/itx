@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -17,6 +16,19 @@ const Contact = () => {
   const { toast } = useToast();
   const { ref, isVisible } = useIntersectionObserver();
 
+  // Check for selected plan on component mount
+  useEffect(() => {
+    const selectedPlan = sessionStorage.getItem('selectedPlan');
+    if (selectedPlan) {
+      setFormData(prev => ({
+        ...prev,
+        message: `Estoy interesado en el plan "${selectedPlan}". Me gustaría recibir más información.`
+      }));
+      // Clear sessionStorage after using it
+      sessionStorage.removeItem('selectedPlan');
+    }
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -27,12 +39,25 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      // For now, we're simulating a form submission
-      // In a real implementation, you'd send this data to a backend service
-      // that would handle the email sending to admin@itxuy.com
+      // Email service integration - this will need to be implemented with a proper backend service
+      // You can use EmailJS, FormSubmit, or any other service that allows you to send emails from client-side
+      // For demonstration, we'll just simulate the API call
       
-      // Email service integration placeholder
-      console.log('Form data submitted to admin@itxuy.com:', formData);
+      // This is where you'll integrate with an email sending service to admin@itxuy.com
+      console.log('Form submitted with data:', formData);
+      
+      // For a real implementation, you would use something like:
+      // await fetch('https://formsubmit.co/admin@itxuy.com', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     name: formData.name,
+      //     email: formData.email,
+      //     message: formData.message,
+      //   }),
+      // });
       
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -77,12 +102,6 @@ const Contact = () => {
           <p className="section-subtitle mx-auto">
             ¿Tenés una duda? Escribinos y vemos cómo potenciar tu tecnología. El primer diagnóstico es gratis.
           </p>
-          <div className="inline-block bg-gradient-to-r from-blue-500/20 to-blue-700/20 px-4 py-2 rounded-lg border border-blue-500/30 shadow-inner">
-            <p className="text-sm text-blue-300 flex items-center justify-center">
-              <Mail size={14} className="mr-2 text-itx-blue" />
-              Tu mensaje será enviado a: <span className="font-semibold text-white ml-1">admin@itxuy.com</span>
-            </p>
-          </div>
         </div>
         
         <div className="max-w-2xl mx-auto">

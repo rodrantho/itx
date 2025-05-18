@@ -42,6 +42,11 @@ const Navbar = () => {
       navigate(`/#${sectionId}`);
     }
   };
+  
+  const navigateTo = (path: string) => {
+    closeMenu();
+    navigate(path);
+  };
 
   const navLinks = [
     { name: 'Servicios', id: 'servicios' },
@@ -80,6 +85,12 @@ const Navbar = () => {
               {link.name}
             </button>
           ))}
+          <button
+            onClick={() => navigateTo('/blog')}
+            className="text-sm text-itx-dark hover:text-itx-blue transition-colors"
+          >
+            Blog
+          </button>
           <Button 
             size="sm"
             onClick={() => handleNavigation('contacto')}
@@ -112,6 +123,12 @@ const Navbar = () => {
                 {link.name}
               </button>
             ))}
+            <button
+              onClick={() => navigateTo('/blog')}
+              className="text-sm py-2 text-itx-dark hover:text-itx-blue transition-colors text-left"
+            >
+              Blog
+            </button>
             <Button
               size="sm"
               onClick={() => handleNavigation('contacto')}

@@ -1,6 +1,6 @@
 
 import { useIntersectionObserver } from '@/lib/animations';
-import { Cpu, Zap } from 'lucide-react';
+import { Cpu, Zap, Target, Eye } from 'lucide-react';
 
 const CertificationBadge = ({ name }: { name: string }) => {
   return (
@@ -10,9 +10,47 @@ const CertificationBadge = ({ name }: { name: string }) => {
   );
 };
 
+const MissionVisionCard = ({ 
+  icon: Icon, 
+  title, 
+  description,
+  delay
+}: {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  delay: number;
+}) => {
+  const { ref, isVisible } = useIntersectionObserver();
+  
+  return (
+    <div 
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className={`transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+      style={{ transitionDelay: `${delay * 150}ms` }}
+    >
+      <div className="bg-gradient-to-br from-blue-600/20 to-green-600/10 rounded-xl p-1 shadow-lg">
+        <div className="bg-gradient-to-br from-card to-gray-900/80 rounded-lg p-6 border border-blue-500/30 backdrop-blur-sm">
+          <div className="flex items-center mb-4">
+            <div className="p-3 bg-gradient-to-br from-blue-500/30 to-transparent rounded-full mr-3">
+              <Icon className="text-itx-blue" size={24} />
+            </div>
+            <h3 className="text-xl font-semibold text-white">{title}</h3>
+          </div>
+          <div className="h-0.5 w-12 bg-itx-blue mb-4"></div>
+          <p className="text-blue-100">{description}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const About = () => {
   const { ref, isVisible } = useIntersectionObserver();
   const { ref: ref2, isVisible: isVisible2 } = useIntersectionObserver({ threshold: 0.2 });
+  const { ref: refMission, isVisible: isMissionVisible } = useIntersectionObserver({ threshold: 0.1 });
   
   const certifications = [
     "MikroTik",
@@ -84,6 +122,29 @@ const About = () => {
             {/* Floating tech elements */}
             <div className="hidden lg:block absolute -bottom-10 -right-10 w-24 h-24 border border-blue-500/20 rounded-lg" style={{transform: 'rotate(15deg)'}}></div>
             <div className="hidden lg:block absolute -top-5 -left-5 w-16 h-16 border border-green-500/20 rounded-lg" style={{transform: 'rotate(-10deg)'}}></div>
+          </div>
+        </div>
+        
+        <div 
+          ref={refMission as React.RefObject<HTMLDivElement>}
+          className={`mt-16 transition-all duration-700 ${
+            isMissionVisible ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <h3 className="text-2xl font-semibold text-center text-white mb-8">Nuestra filosofía</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <MissionVisionCard
+              icon={Target}
+              title="Nuestra misión"
+              description="Transformar la experiencia IT de las pequeñas empresas, brindando soluciones ágiles, accesibles y humanas. Acompañamos a cada cliente como si fuéramos parte de su equipo, porque creemos que la tecnología no debería ser un obstáculo, sino una herramienta que potencie."
+              delay={0}
+            />
+            <MissionVisionCard
+              icon={Eye}
+              title="Nuestra visión"
+              description="Construir una nueva forma de hacer soporte IT en Uruguay, dejando atrás lo impersonal y burocrático. Queremos que cada pyme, profesional o institución pueda contar con servicios de calidad, sin importar su tamaño. ITX nace con la convicción de que podemos hacer las cosas mejor, más cerca y con sentido."
+              delay={1}
+            />
           </div>
         </div>
       </div>

@@ -2,16 +2,28 @@
 import { useIntersectionObserver } from '@/lib/animations';
 import { scrollToSection } from '@/lib/scroll-utils';
 import { Clock, LayoutPanelLeft, CalendarClock } from 'lucide-react';
+import { Card, CardContent } from './ui/card';
+import { Button } from './ui/button';
 
 const PlanCard = ({
   icon: Icon,
   title,
+  emoji,
+  headline,
   description,
+  callToAction,
+  buttonText,
+  featured = false,
   delay = 0
 }: {
   icon: React.ElementType;
   title: string;
+  emoji: string;
+  headline: string;
   description: string;
+  callToAction: string;
+  buttonText: string;
+  featured?: boolean;
   delay?: number;
 }) => {
   const { ref, isVisible } = useIntersectionObserver();
@@ -23,31 +35,47 @@ const PlanCard = ({
   };
 
   return (
-    <div
+    <Card
       ref={ref as React.RefObject<HTMLDivElement>}
       className={`tech-card glow-effect transition-all duration-700 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}
+      } ${featured ? 'border-itx-blue/50 shadow-lg shadow-blue-900/30 relative overflow-hidden' : ''}`}
       style={{ transitionDelay: `${delay * 150}ms` }}
     >
-      <div className="flex flex-col items-center text-center p-4">
-        <div className="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-700/20 mb-6 border border-blue-500/30 shadow-inner">
-          <Icon className="w-8 h-8 text-itx-blue" />
+      {featured && (
+        <div className="absolute -right-12 top-6 bg-itx-blue text-white py-1 px-10 rotate-45 text-sm font-medium shadow-md">
+          Recomendado
         </div>
-        <h3 className="text-2xl font-semibold mb-4 text-white">{title}</h3>
+      )}
+      
+      <CardContent className="flex flex-col items-center text-center p-6">
+        <div className={`flex items-center justify-center w-20 h-20 rounded-full ${
+          featured ? 'bg-gradient-to-br from-blue-500/30 to-blue-700/30' : 'bg-gradient-to-br from-blue-500/20 to-blue-700/20'
+        } mb-6 border ${featured ? 'border-blue-500/50' : 'border-blue-500/30'} shadow-inner`}>
+          <Icon className={`w-8 h-8 ${featured ? 'text-white' : 'text-itx-blue'}`} />
+        </div>
+        
+        <div className="mb-3 text-2xl">{emoji}</div>
+        <h3 className={`text-2xl font-semibold mb-2 ${featured ? 'text-itx-blue' : 'text-white'}`}>{title}</h3>
+        <p className="text-lg font-medium mb-3 text-blue-100">{headline}</p>
         <div className="w-12 h-0.5 bg-itx-blue mb-4"></div>
         <p className="text-blue-100 mb-4">{description}</p>
+        <p className="text-blue-200 mb-4 font-medium">{callToAction}</p>
         
         <div className="mt-4 w-full h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent"></div>
         
-        <button 
+        <Button 
           onClick={handleMoreInfo}
-          className="mt-4 pb-2 hover:text-itx-blue transition-colors cursor-pointer"
+          className={`mt-6 ${
+            featured 
+              ? 'bg-gradient-to-r from-itx-blue to-blue-600 hover:from-itx-blue/90 hover:to-blue-600/90 text-white shadow-lg shadow-blue-900/20' 
+              : 'bg-transparent hover:bg-blue-500/10 text-blue-400 hover:text-itx-blue border border-blue-500/30'
+          }`}
         >
-          <span className="text-sm uppercase tracking-wider text-blue-400 hover:text-itx-blue font-medium">Más Información</span>
-        </button>
-      </div>
-    </div>
+          {buttonText}
+        </Button>
+      </CardContent>
+    </Card>
   );
 };
 
@@ -56,19 +84,34 @@ const Plans = () => {
   
   const plans = [
     {
-      icon: Clock,
-      title: "Por hora",
-      description: "Ideal para tareas puntuales que requieren atención inmediata y específica sin compromisos a largo plazo."
+      icon: CalendarClock,
+      emoji: "⭐",
+      title: "Plan Mensual",
+      headline: "Tu equipo de IT sin contratar uno.",
+      description: "Un plan flexible y completo que se adapta a tu empresa. Puede incluir soporte por horas, días o tareas específicas, o bien todo el control tecnológico.",
+      callToAction: "👉 Soporte prioritario, mantenimiento preventivo y asesoramiento continuo.",
+      buttonText: "Consultá este plan",
+      featured: true
     },
     {
       icon: LayoutPanelLeft,
-      title: "Por proyecto",
-      description: "Implementaciones, migraciones e instalaciones completas con alcance y precio definidos para tu tranquilidad."
+      emoji: "⚙️",
+      title: "Plan por Proyecto",
+      headline: "Soluciones llave en mano.",
+      description: "Ideal para implementaciones puntuales como instalación de redes, migraciones, configuración de servidores o cambios estructurales.",
+      callToAction: "👉 Presupuesto cerrado, planificación clara y ejecución profesional.",
+      buttonText: "Solicitar cotización",
+      featured: false
     },
     {
-      icon: CalendarClock,
-      title: "Mantenimiento mensual",
-      description: "Soporte completo para tu infraestructura con precios predecibles y asistencia continua, sin sorpresas."
+      icon: Clock,
+      emoji: "⏱️",
+      title: "Plan por Hora",
+      headline: "Soporte puntual sin ataduras.",
+      description: "Pagás solo por el tiempo que necesitás. Ideal para resolver problemas específicos o tareas aisladas, sin compromiso mensual.",
+      callToAction: "👉 Tiempo mínimo claro. Remoto o presencial.",
+      buttonText: "Consultar disponibilidad",
+      featured: false
     }
   ];
 
@@ -100,7 +143,12 @@ const Plans = () => {
               key={index}
               icon={plan.icon}
               title={plan.title}
+              emoji={plan.emoji}
+              headline={plan.headline}
               description={plan.description}
+              callToAction={plan.callToAction}
+              buttonText={plan.buttonText}
+              featured={plan.featured}
               delay={index}
             />
           ))}

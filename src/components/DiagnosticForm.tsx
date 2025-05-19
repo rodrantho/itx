@@ -25,8 +25,11 @@ const diagnosticSchema = z.object({
   serviceMode: z.enum(['remote', 'presential', 'both'], {
     required_error: "Por favor selecciona un modo de servicio",
   }),
-  contact: z.string().min(3, {
-    message: "Por favor ingresa tu información de contacto",
+  name: z.string().min(2, {
+    message: "Por favor ingresa tu nombre",
+  }),
+  contactInfo: z.string().min(5, {
+    message: "Por favor ingresa un email o teléfono válido",
   }),
 });
 
@@ -43,7 +46,8 @@ const DiagnosticForm = () => {
       frequency: undefined,
       ownSystems: undefined,
       serviceMode: undefined,
-      contact: "",
+      name: "",
+      contactInfo: "",
     },
   });
 
@@ -297,15 +301,28 @@ const DiagnosticForm = () => {
               </Card>
 
               <Card>
-                <CardContent className="pt-6">
+                <CardContent className="pt-6 space-y-4">
                   <FormField
                     control={form.control}
-                    name="contact"
+                    name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Tu nombre y contacto:</FormLabel>
+                        <FormLabel>Tu nombre:</FormLabel>
                         <FormControl>
-                          <Input placeholder="Nombre - Email o WhatsApp" {...field} />
+                          <Input placeholder="Nombre y apellido" {...field} />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="contactInfo"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Tu email o teléfono:</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Email o WhatsApp" {...field} />
                         </FormControl>
                       </FormItem>
                     )}

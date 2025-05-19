@@ -13,7 +13,7 @@ import DiagnosticForm from '@/components/DiagnosticForm';
 import { handleInitialScroll } from '@/lib/scroll-utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
-import { Video, Calendar } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 
 const Index = () => {
   // Update document title
@@ -34,6 +34,24 @@ const Index = () => {
     };
   }, []);
 
+  const handleWhatsAppClick = (source: string) => {
+    const whatsappNumber = '+598604031';
+    let message = '';
+    
+    switch(source) {
+      case 'agendar':
+        message = 'Hola ITX, quiero agendar una reunión (desde botón principal).';
+        break;
+      case 'diagnostic':
+        message = 'Hola ITX, necesito ayuda con mi diagnóstico (desde botón diagnóstico).';
+        break;
+      default:
+        message = 'Hola ITX, me interesa conocer más sobre sus servicios.';
+    }
+    
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -50,12 +68,12 @@ const Index = () => {
             <DialogTrigger asChild>
               <Button className="bg-itx-green hover:bg-itx-green/90 tech-card">
                 <Calendar className="h-5 w-5 mr-2" />
-                Agendar Reunión
+                Agendar una meet
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
               <DialogHeader>
-                <DialogTitle>Agendar una reunión</DialogTitle>
+                <DialogTitle>Agendar una meet</DialogTitle>
               </DialogHeader>
               {/* Aquí irá el calendario de Google cuando esté disponible */}
               <div className="h-96 bg-gray-800 flex items-center justify-center rounded-md">
@@ -67,7 +85,7 @@ const Index = () => {
           </Dialog>
           
           <Button
-            onClick={() => window.open("https://wa.me/+598123456789", "_blank")}
+            onClick={() => handleWhatsAppClick('agendar')}
             className="bg-green-600 hover:bg-green-700 tech-card"
           >
             <svg

@@ -9,7 +9,7 @@ const Faq = () => {
   const faqs = [
     {
       question: "¿Trabajan solo en Montevideo?",
-      answer: "No, damos soporte remoto en todo Uruguay utilizando tecnologías avanzadas de conexión segura. Para servicios presenciales, cubrimos Montevideo y zonas aledañas con respuesta rápida."
+      answer: "Brindamos servicio remoto y presencial en todo Uruguay."
     },
     {
       question: "¿Tienen contrato mínimo?",
@@ -60,7 +60,7 @@ const Faq = () => {
                 <AccordionTrigger className="text-left font-medium text-blue-100 hover:text-white py-4">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-blue-200 bg-blue-900/20 p-4 rounded-lg">
+                <AccordionContent className="text-blue-200 bg-blue-900/20 p-4 rounded-lg max-h-60 overflow-y-auto">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
